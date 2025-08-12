@@ -45,4 +45,5 @@ export default defineConfig(({ command }) => {
       }),
     ],
   };
+    base: '/goit-js-hw-11/'
 });
