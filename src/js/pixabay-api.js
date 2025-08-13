@@ -1,19 +1,22 @@
 import axios from 'axios';
 
-export function getImagesByQuery(query, page) {
-  return axios
-    .get('https://pixabay.com/api/', {
+export async function getImagesByQuery(query, page) {
+  try {
+    const response = await axios.get('https://pixabay.com/api/', {
       params: {
         key: '51711759-c98880f89c2a2cc3e02319f38',
         q: query.trim(),
         image_type: 'photo',
         orientation: 'horizontal',
         safesearch: true,
-        per_page: 15, // кількість карток за запит
-        page: page,   // номер сторінки
+        per_page: 15,
+        page: page,
       },
-    })
-    .then(response => {
-      return response.data; // повертаємо весь об'єкт, щоб отримати totalHits
     });
+
+    return response.data;
+  } catch (error) {
+    console.error('Ошибка при получении изображений:', error);
+    throw error;
+  }
 }
